@@ -55,7 +55,7 @@ def search():
     if form.validate():
         query = ProfServ.query
         if form.vendor.data:
-            query = query.filter(ProfServ.vendor('regexp')(r'\b{}\b'.format(form.keyword.data))).all()
+            query = query.filter(ProfServ.vendor.ilike('%{0}%'.format(form.vendor.data)))
         if form.original_contract_id.data:
             query = query.filter(ProfServ.original_contract_id.ilike('%{0}%'.format(form.original_contract_id.data)))
         if form.start_dt.data:
